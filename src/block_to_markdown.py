@@ -9,7 +9,7 @@ def markdown_to_blocks(markdown):
     # If the current line is empty and the block isn't, a new line was encountered.
     # Start a new block, by appendign block to blocks and clearing block.
     if not line and block:
-      block.append(block.strip())
+      blocks.append(block.strip())
       block = ""
       continue
     # If neither of the above conditions are true, then we are on a current block.
