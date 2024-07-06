@@ -19,3 +19,26 @@ def markdown_to_blocks(markdown):
     # Cleaning up if block is not empty.
     blocks.append(block.strip())
   return blocks
+
+def block_to_block_type(block):
+  if re.match(r"^#+ ", block):
+    return BLOCK_TYPE_HEADING
+  if block.startswith("```") and block.endswith("```"):
+    return BLOCK_TYPE_CODE
+  if len(re.findall(r"> ", block)) == len(block.split("\n")):
+    return BLOCK_TYPE_QUOTE
+  if len(re.findall(r"\* ", block)) == len(block.split("\n")):
+    return BLOCK_TYPE_UNORDERED_LIST
+  if len(re.findall(r"- ", block)) == len(block.split("\n")):
+    return BLOCK_TYPE_UNORDERED_LIST
+  
+  is_list = True
+  for i in range(len(block.split("\n"))):
+    pattern = re.compile(f'{i}/. ')
+    if pattern.match is None:
+      is_list = False
+      break
+  if is_list:
+    return BLOCK_TYPE_ORDERED_LIST
+  
+  return BLOCK_TYPE_PARAGRAPH
