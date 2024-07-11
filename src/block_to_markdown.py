@@ -1,3 +1,6 @@
+from constants import *
+import re
+
 def markdown_to_blocks(markdown):
   blocks = []
   block = ""
@@ -31,14 +34,14 @@ def block_to_block_type(block):
     return BLOCK_TYPE_UNORDERED_LIST
   if len(re.findall(r"- ", block)) == len(block.split("\n")):
     return BLOCK_TYPE_UNORDERED_LIST
-  
-  is_list = True
+
+  is_ordered_list = True
   for i in range(len(block.split("\n"))):
-    pattern = re.compile(f'{i}/. ')
-    if pattern.match is None:
-      is_list = False
+    regex = re.compile(f"{i+1}\. ")
+    if regex.match(block.split("\n")[i]) is None:
+      is_ordered_list = False
       break
-  if is_list:
+  if is_ordered_list:
     return BLOCK_TYPE_ORDERED_LIST
   
   return BLOCK_TYPE_PARAGRAPH
