@@ -78,7 +78,7 @@ def unordered_list_to_html(block):
 	for list_item in list_items:
 		text = list_item[2:]
 		children = text_to_children(text)
-		html_list_items.append(Parent("li", children))
+		html_list_items.append(ParentNode("li", children))
 	return ParentNode("ul", html_list_items)
 
 def quote_to_html(block):
