@@ -1,5 +1,6 @@
 import os
 import shutil
+from generate_page import *
 
 def clear_directory(target):
 	files = os.listdir(target)
@@ -37,9 +38,9 @@ def copy_and_move_files(source, target):
 			copy_and_move_files(current_path, os.path.join(target, item))
 
 def main():
-	source_dir = "./static"
-	target_dir = "./public"
-	copy_and_move_files(source_dir, target_dir)
+	clear_directory("./public")
+	copy_and_move_files("./static", "./public")
+	generate_page("./content/index.md", "./template.html", "./public")	
 
 if __name__=="__main__":
 	main()
