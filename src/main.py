@@ -40,7 +40,7 @@ def copy_and_move_files(source, target):
 def main():
 	clear_directory("./public")
 	copy_and_move_files("./static", "./public")
-	generate_page("./content/index.md", "./template.html", "./public")	
+	generate_pages_recursive("./content", "./template.html", "./public")	
 
 if __name__=="__main__":
 	main()
